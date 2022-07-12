@@ -11,16 +11,19 @@ Order.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
+		customer_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			foreignKey: true,
+			references: {
+				model: 'Customers',
+			},
+		},
 	},
 	{
 		sequelize,
 		modelName: 'Order',
 	}
 )
-Order.belongsTo(Customer, {
-	foreignKey: 'customer_id',
-})
-Order.hasMany(Suit, {
-	foreignKey: 'suit_id',
-})
+
 export default Order

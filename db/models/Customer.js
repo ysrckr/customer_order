@@ -15,20 +15,19 @@ Customer.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		vendor_id: {
+			type: DataTypes.INTEGER,
+			foreignKey: true,
+			allowNull: false,
+			references: {
+				model: 'Vendors',
+			},
+		},
 	},
 	{
 		sequelize,
 		modelName: 'Customer',
 	}
 )
-Customer.belongsTo(Vendor, {
-	foreignKey: 'vendor_id',
-})
-Customer.hasMany(Order, {
-	foreignKey: 'order_id',
-})
-Customer.hasOne(Measurement, {
-	foreignKey: 'measurement_id',
-})
 
 export default Customer

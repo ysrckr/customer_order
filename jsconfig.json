@@ -6,7 +6,8 @@
 			"@styles/*": ["/styles/*"],
 			"@config/*": ["/config/*"],
 			"@classes/*": ["/classes/*"],
-			"@stores/*": ["/stores/*"]
+			"@stores/*": ["/stores/*"],
+			"@db/*": ["/db/*"],
 		}
 	}
 }

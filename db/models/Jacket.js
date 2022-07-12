@@ -17,13 +17,19 @@ Jacket.init(
 		img_url: {
 			type: DataTypes.STRING,
 		},
+		suit_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			foreignKey: true,
+			references: {
+				model: 'Suits',
+			},
+		},
 	},
 	{
 		sequelize,
 		modelName: 'Jacket',
 	}
 )
-Jacket.belongsTo(Suit, {
-	foreignKey: 'suit_id',
-})
+
 export default Jacket

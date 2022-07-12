@@ -18,10 +18,10 @@ Vendor.init(
 	},
 	{
 		sequelize,
-		modelName: 'Vendor',
+		modelName: 'Vendors',
 	}
 )
-Vendor.hasMany(Customer, {
-	foreignKey: 'customer_id',
-})
+
 export default Vendor
+
+

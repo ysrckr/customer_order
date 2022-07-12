@@ -11,22 +11,19 @@ Suit.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
+		customer_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			foreignKey: true,
+			references: {
+				model: 'Customers',
+			},
+		},
 	},
 	{
 		sequelize,
 		modelName: 'Suit',
 	}
 )
-Suit.belongsTo(Order, {
-	foreignKey: 'order_id',
-})
-Suit.hasOne(Pants, {
-	foreignKey: 'pants_id',
-})
-Suit.hasOne(Jacket, {
-	foreignKey: 'jacket_id',
-})
-Suit.hasOne(WaistCoat, {
-	foreignKey: 'waistcoat_id',
-})
+
 export default Suit

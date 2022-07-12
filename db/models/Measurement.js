@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize'
 import sequelize from '../connection'
 
+
 class Measurement extends Model {}
 
 Measurement.init(
@@ -44,13 +45,19 @@ Measurement.init(
 		pants_length: {
 			type: DataTypes.INTEGER,
 		},
+		customer_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			foreignKey: true,
+			references: {
+				model: 'Customers',
+			},
+		}
 	},
 	{
 		sequelize,
 		modelName: 'Measurement',
 	}
 )
-Measurement.belongsTo(Customer, {
-	foreignKey: 'customer_id',
-})
+
 export default Measurement
