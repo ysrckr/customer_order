@@ -1,13 +1,19 @@
 import Header from '@comps/layout/Header'
 import Footer from '@comps/layout/Footer'
 import MainContainer from '@comps/layout/MainContainer'
+import Form from '@comps/layout/Form'
+import FormSelect from '@comps/layout/FormSelect'
+import Vendor from '@classes/Vendor'
 
-export default function Home() {
+export default function Home({ vendors }) {
 	return (
 		<>
 			<Header />
 			<MainContainer>
 				<h1>Home</h1>
+				<Form>
+					<FormSelect id="vendorAll" label="Select Vendor" options={vendors} />
+				</Form>
 			</MainContainer>
 			<Footer />
 		</>
@@ -15,7 +21,12 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
+	const vendors = await Vendor.getAll()
+	
+
 	return {
-		props: {},
+		props: {
+			vendors,
+		},
 	}
 }

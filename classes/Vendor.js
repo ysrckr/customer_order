@@ -16,18 +16,22 @@ class Vendor {
 	}
 	get name() {
 		return this.#name
-
 	}
 	set name(name) {
 		this.#name = name
 	}
 	async create() {
-		const vendor = await axios.post('/api/v1/vendors', {
+		const vendor = await axios.post(`${process.env.API_URL}/vendors`, {
 			name: this.#name,
 		})
 		const { data } = vendor
 		vendorStore.vendorId = data.id
 		this.#id = data.id
+	}
+	static async getAll() {
+		const vendors = await axios.get(`${process.env.API_URL}/vendors`)
+		const data = await vendors.data
+		return data
 	}
 }
 export default Vendor
