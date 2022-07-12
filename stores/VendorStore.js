@@ -1,6 +1,7 @@
 import {makeAutoObservable} from 'mobx';
 class VendorStore {
     vendorName = '';
+    vendorId = '';
     constructor() {
         makeAutoObservable(this);
     }

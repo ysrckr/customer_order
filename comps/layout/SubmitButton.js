@@ -1,7 +1,7 @@
-const SubmitButton = () => {
+const SubmitButton = ({buttonLabel}) => {
   return (
     <>
-        <button type="submit">Add Order</button>
+        <button type="submit">{buttonLabel}</button>
     </>
   )
 }
