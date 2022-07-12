@@ -1,9 +1,9 @@
 import { DataTypes, Model } from 'sequelize'
 import sequelize from '../connection'
 
-class Vendor extends Model {}
+class Waistcoat extends Model {}
 
-Vendor.init(
+Waistcoat.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -11,17 +11,19 @@ Vendor.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		name: {
+		description: {
 			type: DataTypes.STRING,
-			allowNull: false,
+		},
+		img_url: {
+			type: DataTypes.STRING,
 		},
 	},
 	{
 		sequelize,
-		modelName: 'Vendor',
+		modelName: 'Waistcoat',
 	}
 )
-Vendor.hasMany(Customer, {
-	foreignKey: 'customer_id',
+Waistcoat.belongsTo(Suit, {
+	foreignKey: 'suit_id',
 })
-export default Vendor
+export default Waistcoat

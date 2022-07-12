@@ -1,9 +1,9 @@
 import { DataTypes, Model } from 'sequelize'
 import sequelize from '../connection'
 
-class Vendor extends Model {}
+class Order extends Model {}
 
-Vendor.init(
+Order.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -11,17 +11,16 @@ Vendor.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		name: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
 	},
 	{
 		sequelize,
-		modelName: 'Vendor',
+		modelName: 'Order',
 	}
 )
-Vendor.hasMany(Customer, {
+Order.belongsTo(Customer, {
 	foreignKey: 'customer_id',
 })
-export default Vendor
+Order.hasMany(Suit, {
+	foreignKey: 'suit_id',
+})
+export default Order
