@@ -4,14 +4,21 @@ import Form from '@comps/layout/Form'
 import FormInput from '@comps/layout/FormInput'
 import SubmitButton from '@comps/layout/SubmitButton'
 import MainContainer from '@comps/layout/MainContainer'
+import { form } from '@classes/Form'
+
 export default function Home() {
+	const { submitHandler, changeHandler } = form
 	return (
 		<>
 			<Header />
 
 			<MainContainer>
-				<Form>
-					<FormInput />
+				<Form submitHandler={submitHandler}>
+					<FormInput
+						label={'Vendor'}
+						id={'vendor'}
+						changeHandler={changeHandler}
+					/>
 					<SubmitButton />
 				</Form>
 			</MainContainer>
