@@ -4,13 +4,21 @@ import Form from '@comps/layout/Form'
 import FormInput from '@comps/layout/FormInput'
 import SubmitButton from '@comps/layout/SubmitButton'
 import MainContainer from '@comps/layout/MainContainer'
-import { vendorForm } from '@classes/Form'
+import VendorComp from '@comps/VendorComp'
+import Handlers from '@classes/Handlers'
+import vendorStore from '@stores/vendorStore'
+import Vendor from '@classes/Vendor'
 
-const vendors = () => {
-	const { submitHandler, changeHandler } = vendorForm
+const vendorsHome = ({ vendors }) => {
+	const { submitHandler, changeHandler } = Handlers
+
 	return (
 		<>
-			<Header />
+			<Header
+				title="Vendors"
+				desc="See All Vendors and Add New Ones"
+				headerTitle="Vendors"
+			/>
 
 			<MainContainer>
 				<Form submitHandler={submitHandler}>
@@ -19,13 +27,25 @@ const vendors = () => {
 						id="vendor"
 						placeholder="Vendor Name"
 						changeHandler={changeHandler}
+						DataType="vendor"
 					/>
 					<SubmitButton buttonLabel="Create Vendor" />
 				</Form>
+				<VendorComp vendors={vendors} />
 			</MainContainer>
 
 			<Footer />
 		</>
 	)
 }
-export default vendors
+export default vendorsHome
+
+export async function getServerSideProps() {
+	const vendors = await Vendor.getAll()
+	vendorStore.vendorsArray = [...vendors]
+	return {
+		props: {
+			vendors,
+		},
+	}
+}

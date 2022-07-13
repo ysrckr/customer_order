@@ -8,7 +8,11 @@ import Vendor from '@classes/Vendor'
 export default function Home({ vendors }) {
 	return (
 		<>
-			<Header />
+			<Header
+				title="Customer Order"
+				desc="Receive Orders From Customers"
+				headerTitle="Home"
+			/>
 			<MainContainer>
 				<h1>Home</h1>
 				<Form>
@@ -22,7 +26,6 @@ export default function Home({ vendors }) {
 
 export async function getServerSideProps() {
 	const vendors = await Vendor.getAll()
-	
 
 	return {
 		props: {

@@ -33,5 +33,8 @@ class Vendor {
 		const data = await vendors.data
 		return data
 	}
+	static async delete(id) {
+		await axios.delete(`${process.env.API_URL}/vendors/${id}`)
+	}
 }
 export default Vendor
