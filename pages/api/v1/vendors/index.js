@@ -17,9 +17,9 @@ const handler = async (req, res) => {
 				const vendor = await Vendor.create({
 					name: req.body.name,
 				})
-				res.status(201).json(vendor)
+				await res.status(201).json(vendor)
 			} catch (err) {
-				res.status(500).json({
+				await res.status(500).json({
 					error: err.message,
 				})
 			}

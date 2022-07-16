@@ -3,9 +3,12 @@ import Footer from '@comps/layout/Footer'
 import MainContainer from '@comps/layout/MainContainer'
 import Form from '@comps/layout/Form'
 import FormSelect from '@comps/layout/FormSelect'
-import Vendor from '@classes/Vendor'
+import { observer } from 'mobx-react'
+import axios from 'axios'
+import vendorStore from '@stores/VendorStore'
 
-export default function Home({ vendors }) {
+const Home = ({ vendors }) => {
+	vendorStore.vendorsArray = vendors
 	return (
 		<>
 			<Header
@@ -23,9 +26,11 @@ export default function Home({ vendors }) {
 		</>
 	)
 }
+export default observer(Home)
 
-export async function getServerSideProps() {
-	const vendors = await Vendor.getAll()
+export const getServerSideProps = async ctx => {
+	const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/vendors`)
+	const vendors = await res.data
 
 	return {
 		props: {

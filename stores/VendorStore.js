@@ -1,11 +1,14 @@
 import { makeAutoObservable } from 'mobx'
+import axios from 'axios'
+
 class VendorStore {
-	vendorName = ''
 	vendorId = ''
+	vendorName = ''
 	vendorsArray = []
 	constructor() {
 		makeAutoObservable(this)
 	}
+
 }
 
 const vendorStore = new VendorStore()

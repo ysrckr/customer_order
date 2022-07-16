@@ -1,17 +1,12 @@
-import Handlers from '@classes/Handlers'
-const DeleteButton = ({ dataId, dataType }) => {
-	const { deleteItem } = Handlers
+import { observer } from 'mobx-react'
+
+const DeleteButton = ({ dataId, deleteItem }) => {
 	return (
 		<div>
-			<button
-				className="bg-red-500"
-				onClick={deleteItem}
-				data-type={dataType}
-				data-id={dataId}
-			>
+			<button className="bg-red-500" onClick={deleteItem} data-id={dataId}>
 				Delete
 			</button>
 		</div>
 	)
 }
-export default DeleteButton
+export default observer(DeleteButton)
