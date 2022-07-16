@@ -4,11 +4,16 @@ import axios from 'axios'
 class VendorStore {
 	vendorId = ''
 	vendorName = ''
-	vendorsArray = []
-	constructor() {
+	vendorList = []
+	constructor(vendorList) {
 		makeAutoObservable(this)
 	}
-
+	setVendorList(vendorList) {
+		this.vendorList = vendorList
+	}
+	vendorList() {
+		return this.vendorList
+	}
 }
 
 const vendorStore = new VendorStore()

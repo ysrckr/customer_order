@@ -6,8 +6,6 @@ import SubmitButton from '@comps/layout/SubmitButton'
 import MainContainer from '@comps/layout/MainContainer'
 import VendorComp from '@comps/VendorComp'
 import { useState } from 'react'
-import vendorStore from '@stores/VendorStore'
-import { observer } from 'mobx-react'
 import axios from 'axios'
 
 const VendorsHome = ({ vendors }) => {
@@ -57,14 +55,18 @@ const VendorsHome = ({ vendors }) => {
 		</>
 	)
 }
-export default observer(VendorsHome)
+export default VendorsHome
 
 export const getServerSideProps = async ctx => {
-	const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/vendors`)
-	const vendors = await res.data
-	return {
-		props: {
-			vendors,
-		},
+	try {
+		const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/vendors`)
+		const vendors = await res.data
+		return {
+			props: {
+				vendors,
+			},
+		}
+	} catch (error) {
+		console.log(error)
 	}
 }
