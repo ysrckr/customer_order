@@ -5,21 +5,32 @@ import FormInput from '@comps/layout/FormInput'
 import SubmitButton from '@comps/layout/SubmitButton'
 import MainContainer from '@comps/layout/MainContainer'
 import VendorComp from '@comps/VendorComp'
+import { useState } from 'react'
 import vendorStore from '@stores/VendorStore'
 import { observer } from 'mobx-react'
 import axios from 'axios'
 
-const vendorsHome = ({vendors}) => {
+const VendorsHome = ({ vendors }) => {
+	const [vendorState, setVendorState] = useState(vendors)
+	const [vendorName, setVendorName] = useState('')
 	const changeHandler = e => {
-		vendorStore.vendorName = e.target.value
+		setVendorName(e.target.value)
+		console.log(vendorName)
 	}
 	const createVendor = async e => {
-		e.preventDefault()
-		const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/vendors`, {
-			name: vendorStore.vendorName,
-		})
-		const vendor = await res.data
-		vendorStore.vendorsArray = [...vendorStore.vendorsArray, vendor]
+		try {
+			const res = await axios.post(
+				`${process.env.NEXT_PUBLIC_API_URL}/vendors`,
+				{
+					name: vendorName,
+				}
+			)
+			const vendor = await res.data
+			console.log(vendor)
+			setVendorState([...vendorState, vendor])
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
@@ -40,13 +51,13 @@ const vendorsHome = ({vendors}) => {
 					/>
 					<SubmitButton buttonLabel="Create Vendor" />
 				</Form>
-				<VendorComp vendors={vendors}/>
+				<VendorComp vendors={vendorState} />
 			</MainContainer>
 			<Footer />
 		</>
 	)
 }
-export default observer(vendorsHome)
+export default observer(VendorsHome)
 
 export const getServerSideProps = async ctx => {
 	const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/vendors`)

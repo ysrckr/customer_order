@@ -7,8 +7,7 @@ import axios from 'axios'
 
 const VendorComp = ({ vendors }) => {
 	const [vendorState, setVendorState] = useState(vendors)
-	const deleteVendor = async e => {
-		const { id } = e.target.dataset
+	const deleteVendor = async id => {
 		await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/vendors/${id}`)
 		setVendorState(vendorState.filter(v => v.id !== id))
 	}
@@ -18,7 +17,7 @@ const VendorComp = ({ vendors }) => {
 			<div>
 				<ul>
 					{vendorState.map(vendor => (
-						<li key={vendor.id}>
+						<li key={vendor.id} data-id={vendor.id}>
 							{vendor.name}{' '}
 							<DeleteButton dataId={vendor.id} deleteItem={deleteVendor} />
 						</li>
